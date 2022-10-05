@@ -1,0 +1,609 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--mainColorLight);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+:root {
+  --mainColor: #28335c;
+  --mainColorLight: #b5d0dc;
+  --secondaryColor: #db2839;
+}
+
+.my-nav-bar-test {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 0 2rem;
+  background-color: var(--mainColor);
+  /* background:  url("https://www.codetogive.hu/app/img/landing_bgr.jpg"); */
+  background-image: linear-gradient(
+      to bottom,
+      rgba(97, 31, 204, 0.5),
+      rgba(0, 0, 255, 0.5)
+    ),
+    url("https://www.codetogive.hu/app/img/landing_bgr.jpg");
+  color: whitesmoke;
+}
+
+.my-nav-bar-test h1 {
+  font-size: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.my-nav-bar-test-span {
+  font-size: 14px;
+  color: white;
+  margin-left: 3px;
+  font-weight: 600;
+  background-color: #03da87e3;
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+
+.centercontainer {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+.adminseaction1 {
+  width: 800px;
+  margin: 30px 2%;
+  display: block;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+}
+
+.adminseaction2 {
+  width: 800px;
+  margin: 20px 2%;
+  display: block;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.inputadmin {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid grey;
+  border-radius: 4px;
+}
+
+.createtesttext {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.centercontainer p {
+  margin: 6px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #506771;
+}
+
+.centercontainer .textinput {
+  width: 100%;
+  min-height: 38px;
+  border-radius: 4px;
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 2px 8px;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.centercontainer input:focus {
+  outline: none;
+  border: 2px solid rgb(6, 136, 211);
+}
+
+/* # buttn */
+.button-myadmin {
+  font-family: inherit;
+  font-size: 20px;
+  background: rgb(201, 91, 7);
+  color: white;
+  padding: 0.6em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin: 30px 0;
+}
+
+.button-myadmin span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-myadmin svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.button-myadmin:hover .svg-wrapper-myadmin {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.button-myadmin:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.button-myadmin:hover span {
+  transform: translateX(5em);
+}
+
+.button-myadmin:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+/* remove button css */
+.remove-btn-myadmin {
+  width: 150px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: rgb(159, 57, 57);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #c62121;
+  margin: 20px 0;
+}
+
+.remove-btn-myadmin,
+.remove-btn-myadmin span {
+  transition: 200ms;
+}
+
+.remove-btn-myadmin .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.remove-btn-myadmin .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 20px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-btn-myadmin svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.remove-btn-myadmin:hover {
+  background: #ff3636;
+}
+
+.remove-btn-myadmin:hover .text {
+  color: transparent;
+}
+
+.remove-btn-myadmin:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.remove-btn-myadmin:focus {
+  outline: none;
+}
+
+.remove-btn-myadmin:active .icon svg {
+  transform: scale(0.8);
+}
+
+/* add new question button */
+.icon-btn-myadmin {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.add-btn-myadmin:hover {
+  width: 120px;
+}
+
+.add-btn-myadmin::before,
+.add-btn-myadmin::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background: seagreen;
+}
+
+.add-btn-myadmin::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn-myadmin::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.icon-btn-myadmin:focus {
+  outline: none;
+}
+
+.btn-txt {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.add-btn-myadmin:hover::before,
+.add-btn-myadmin:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+
+.add-btn-myadmin:hover .btn-txt {
+  opacity: 1;
+}
+
+.add-icon::after,
+.add-icon::before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: seagreen;
+  overflow: hidden;
+}
+
+.add-icon::before {
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.add-icon::after {
+  right: 22px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn-myadmin:hover .add-icon::before {
+  left: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+.add-btn-myadmin:hover .add-icon::after {
+  right: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+.unique_identifier_p_style {
+  padding-top: 20px;
+}
+
+/* save button admin */
+.save-myadmin-btn {
+  --button_radius: 0.7em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+  margin-top: 30px;
+}
+
+.button_top-myadmin {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--button_outline_color);
+  border-radius: var(--button_radius);
+  padding: 0.75em 1.5em;
+  background: var(--button_color);
+  color: var(--button_outline_color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+
+.save-myadmin-btn:hover .button_top-myadmin {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+
+.save-myadmin-btn:active .button_top-myadmin {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
+}
+
+/* add border to each questiom */
+.socialsituationbox {
+  border: 1px solid rgba(128, 128, 128, 0.365);
+  border-radius: 5px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.no_question_myadmin_p {
+  text-align: center;
+}
+
+/* homep page */
+.test_main_section {
+  width: 100%;
+  max-width: 700px;
+  margin: 30px 2%;
+  display: block;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+/* test card on home page */
+.test_mycard {
+  width: 250px;
+  height: 200px;
+  margin: 10px;
+  border-radius: 6px;
+  font-size: 24px;
+  background-color: #506771;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  border: 0 solid rgba(128, 128, 128, 0.664);
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-size: cover;
+}
+
+.button_grid_test {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.social_situation {
+  background: linear-gradient(
+      0deg,
+      rgba(45, 45, 45, 0.3),
+      rgba(81, 81, 81, 0.3)
+    ),
+    url("./images/group2.jpg") no-repeat center;
+}
+
+.motivation_skills {
+  background: linear-gradient(
+      0deg,
+      rgba(20, 20, 20, 0.3),
+      rgba(81, 81, 81, 0.416)
+    ),
+    url("https://salvavita.hu/wp-content/uploads/2022/03/2022.jpg") no-repeat
+      center;
+}
+
+/* motivation quiz style */
+.motivation_conatiner_style {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+.motivation__testcard_style {
+  width: 800px;
+  margin: 30px 2%;
+  display: block;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.instructions_test4_style {
+  margin: 20px 0;
+}
+
+.question_motivation_test {
+  font-weight: 600;
+  color: #2b2b2b;
+  margin: 10px 0;
+}
+
+fieldset {
+  border: 0 none;
+  margin: 30px 0;
+}
+
+.fieldset_question_style p {
+  margin: 6px;
+}
+
+.fieldset_question_style input[type="radio"] {
+  border: 0px;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.fieldset_question_style label {
+  font-size: 22px;
+  margin: 0 0 0 6px;
+}
+
+/* SocialTest style */
+.container_SocialTest {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+
+  /* width: 100%;
+  height: 200px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  flex-flow: wrap; */
+}
+
+.section_SocialTest {
+  width: 100%;
+  max-width: 700px;
+  margin: 30px 2%;
+  display: block;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgb(17 17 26 / 10%) 0px 8px 24px,
+    rgb(17 17 26 / 10%) 0px 16px 56px, rgb(17 17 26 / 10%) 0px 24px 80px;
+}
+
+.image_box_SocialTest {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.add_flex1 {
+  flex: 1;
+}
+
+.image_SocialTest {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.question_SocialTest {
+  text-align: center;
+}
+
+.question_num_SocialTest {
+  text-align: center;
+  color: #565656;
+}
+
+.textarea_multiline_SocialTest {
+  width: 100%;
+  padding: 6px;
+  margin: 16px 0;
+  border-radius: 6px;
+}
+
+textarea {
+  font-family: "Tahoma", "Arial", "Arabic Transparent";
+}
+input[type="text"] {
+  font-family: "Tahoma", "Arial";
+}
+
+/* button style next and recored  */
+
+.button_style_SocialTest {
+  appearance: none;
+  background-color: #000000;
+  border: 2px solid #1a1a1a;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+  margin-bottom: 10px;
+}
+
+.button_style_SocialTest:disabled {
+  pointer-events: none;
+}
+
+.button_style_SocialTest:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button_style_SocialTest:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
