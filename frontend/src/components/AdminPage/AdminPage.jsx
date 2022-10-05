@@ -6,27 +6,54 @@ import uniqid from "uniqid";
 import emailjs from "@emailjs/browser";
 import Navbar from "../Navbar/Navbar";
 import MotivationTestAdmin from "../MotivationTest/MotivationTestAdmin";
+import axios from "axios";
 
 // question1 === 1 === Social Situations
 // question2 === 2 === Motvation Test
 
-const testList = [
-  {
-    value: "1",
-    label: "Social situation",
-    func: <SocialSituations />,
-  },
-  {
-    value: "2",
-    label: "Motivation test",
-    func: <MotivationTestAdmin />,
-  },
-];
+
 
 function AdminPage() {
+
   const [selectedTests, setSelectedTests] = useState([]);
   const [uniqeID, setUniqeID] = useState("");
+  const [situationData, setSituationData] = useState([{}]);
+  const [questionList, setQuestionList] = useState([
+    // { question: "sxsx", imageData: "" },
+    // { question: "sxsx", imageData: "" },
+    // { question: "sxsx", imageData: "" },
+    // { question: "sxsx", imageData: "" },
+    // { question: "sxsx", imageData: "" },
+  ]);
+
   // const uniqeID = `testlink${uniqid()}`;
+
+  const testList = [
+    {
+      value: "1",
+      label: "Social situation",
+      func: <SocialSituations situationData={situationData} questionList={questionList} setQuestionList={setQuestionList}/>,
+    },
+    {
+      value: "2",
+      label: "Motivation test",
+      func: <MotivationTestAdmin />,
+    },
+  ];
+
+  useEffect(() => {
+    async function fetchSituationData() {
+      try {
+        axios.get("http://localhost:5000/questions").then((res) => {
+          setSituationData(res.data);
+          setQuestionList(res.data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchSituationData();
+  }, []);
 
   useEffect(() => {
     setUniqeID(`testlink${uniqid()}`);

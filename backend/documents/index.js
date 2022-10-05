@@ -6,7 +6,7 @@ module.exports = (props) => {
     <html>
         <head></head>
         <body>
-        <h2>Hello </h2>
+        <h2>Hello ${props}</h2>
         </body>
     </html>
     `;

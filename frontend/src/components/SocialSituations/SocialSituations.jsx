@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function SocialSituations() {
-  const [questionList, setQuestionList] = useState([
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-  ]);
-
+function SocialSituations(props) {
   const handleAddNew = () => {
-    setQuestionList([...questionList, { question: "", imageData: "" }]);
-    console.log(questionList);
+    props.setQuestionList([
+      ...props.questionList,
+      { question: "", imageData: "" },
+    ]);
+    console.log(props.questionList);
   };
 
   const onInputFileChange = (event, index) => {
-    const inputData = [...questionList];
+    const inputData = [...props.questionList];
     inputData[index].imageData = event.target.files[0];
-    setQuestionList(inputData);
-    console.log(questionList);
+    props.setQuestionList(inputData);
+    console.log(props.questionList);
   };
 
   const handleQuestionChange = (event, index) => {
-    const inputData = [...questionList];
+    const inputData = [...props.questionList];
     inputData[index].question = event.target.value;
-    setQuestionList(inputData);
+    props.setQuestionList(inputData);
     // console.log(questionList);
   };
 
   const handleDelete = (index) => {
-    const deleteValue = [...questionList];
+    const deleteValue = [...props.questionList];
     deleteValue.splice(index, 1);
-    setQuestionList(deleteValue);
+    props.setQuestionList(deleteValue);
   };
 
   const handleSubmit = (e) => {
-    if (validationOnSubmit(questionList) && questionList.length !== 0) {
+    if (
+      validationOnSubmit(props.questionList) &&
+      props.questionList.length !== 0
+    ) {
       fetch("http://localhost:5000/questions/delete-all-quesitons", {
         method: "DELETE",
         headers: {
@@ -46,8 +44,8 @@ function SocialSituations() {
         const formData = new FormData();
         const url = "https://api.cloudinary.com/v1_1/dmzkkz5jf/image/upload";
 
-        for (let i = 0; i < questionList.length; i++) {
-          let file = questionList[i].imageData;
+        for (let i = 0; i < props.questionList.length; i++) {
+          let file = props.questionList[i].imageData;
           formData.append("file", file);
           formData.append("upload_preset", "hackathonupload");
 
@@ -68,7 +66,7 @@ function SocialSituations() {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  question: questionList[i].question,
+                  question: props.questionList[i].question,
                   imageUrl: data.url,
                 }),
               });
@@ -89,8 +87,8 @@ function SocialSituations() {
 
   return (
     <>
-      {questionList.length ? (
-        questionList.map((questionItem, index) => (
+      {props.questionList.length ? (
+        props.questionList.map((questionItem, index) => (
           <div className="socialsituationbox" key={index}>
             <h4 className="question-h3-text">Question {index + 1}</h4>
             <p>Add the question</p>
