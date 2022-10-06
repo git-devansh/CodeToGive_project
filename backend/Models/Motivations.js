@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const MotivationSchema = mongoose.Schema({
   question: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 

@@ -3,18 +3,17 @@ import { useNavigate, useParams, Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 
-function HomePage() {
+function HomePage(props) {
   const params = useParams();
   const uniqueId = params.uniqueId;
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState({});
 
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
   useEffect(() => {
     async function fetchData() {
       console.log("+++>" + uniqueId);
+      props.setTestLink(uniqueId);
       // await sleep(2000);
       // const res = await axios(ROOT_URL + "/users");
       try {
@@ -25,23 +24,18 @@ function HomePage() {
       } catch (error) {
         console.log(error);
       }
-      // setUserData({
-      //   uniqueId: "dummy222",
-      //   firstname: "dummy1",
-      //   lastname: "dummy Daddy",
-      //   email: "dummydadadu@gmail.com",
-      //   question1Assigned: true,
-      //   question2Assigned: true,
-      // });
     }
     fetchData();
   }, []);
+
+  const handleSaveButton = () => {
+    console.log("props.isStart");
+  };
 
   return (
     <>
       <Navbar pagetype="Test Portal" />
       <div className="centercontainer">
-        {/* <p>{userData.firstname}</p> */}
         <section className="test_main_section">
           {userData.uniqueId === uniqueId ? (
             <>
@@ -50,6 +44,7 @@ function HomePage() {
               <div className="button_grid_test">
                 {userData.question1Assigned && (
                   <button
+                    disabled={props.isStart ? true : false}
                     onClick={() => navigate("socialtest")}
                     className="test_mycard social_situation"
                   >
@@ -58,6 +53,7 @@ function HomePage() {
                 )}
                 {userData.question2Assigned && (
                   <button
+                    disabled={props.isStart2 ? true : false}
                     onClick={() => navigate(`motivationtest`)}
                     className="test_mycard motivation_skills"
                   >
@@ -65,6 +61,12 @@ function HomePage() {
                   </button>
                 )}
               </div>
+              {/* <button
+                disabled={!(props.isStart || props.isStart2)}
+                onClick={() => handleSaveButton}
+              >
+                Submit
+              </button> */}
             </>
           ) : (
             <>

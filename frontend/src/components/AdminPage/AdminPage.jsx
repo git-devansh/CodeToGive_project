@@ -5,16 +5,47 @@ import LabTabs from "../Utils/TabNavBar";
 import uniqid from "uniqid";
 import emailjs from "@emailjs/browser";
 import Navbar from "../Navbar/Navbar";
+import { User } from "../../user";
 import MotivationTestAdmin from "../MotivationTest/MotivationTestAdmin";
 import axios from "axios";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import MyDocument from "../Utils/MyDocument";
 
 // question1 === 1 === Social Situations
 // question2 === 2 === Motvation Test
 
-
+// const dummyData = [
+//   {
+//     social: {
+//       question: ["test2", "cdcd", "test3", "test44"],
+//       imageUrl: [null, null, null, null],
+//       answer: ["", "", "", ""],
+//     },
+//     motivation: {
+//       question: [null],
+//       answer: [""],
+//     },
+//     _id: "633e781023a217a303281f75",
+//     uniqueId: "12345",
+//     __v: 0,
+//   },
+//   {
+//     social: {
+//       question: ["test2", "cdcd", "test3", "test44"],
+//       imageUrl: [null, null, null, null],
+//       answer: ["", "", "", ""],
+//     },
+//     motivation: {
+//       question: [null],
+//       answer: [""],
+//     },
+//     _id: "633e781023a217a303281f75",
+//     uniqueId: "12345",
+//     __v: 0,
+//   },
+// ];
 
 function AdminPage() {
-
   const [selectedTests, setSelectedTests] = useState([]);
   const [uniqeID, setUniqeID] = useState("");
   const [situationData, setSituationData] = useState([{}]);
@@ -26,18 +57,37 @@ function AdminPage() {
     // { question: "sxsx", imageData: "" },
   ]);
 
-  // const uniqeID = `testlink${uniqid()}`;
+  const [motivationData, setMotivationData] = useState([{}]);
+  const [questionList2, setQuestionList2] = useState([]);
+
+  const [searchUser, setSearchUser] = useState("");
+
+  const searchUserFun = (data) => {
+    return data.filter((i) => i.email.toLowerCase().includes(searchUser));
+  };
 
   const testList = [
     {
       value: "1",
       label: "Social situation",
-      func: <SocialSituations situationData={situationData} questionList={questionList} setQuestionList={setQuestionList}/>,
+      func: (
+        <SocialSituations
+          situationData={situationData}
+          questionList={questionList}
+          setQuestionList={setQuestionList}
+        />
+      ),
     },
     {
       value: "2",
       label: "Motivation test",
-      func: <MotivationTestAdmin />,
+      func: (
+        <MotivationTestAdmin
+          motivationData={motivationData}
+          questionList2={questionList2}
+          setQuestionList2={setQuestionList2}
+        />
+      ),
     },
   ];
 
@@ -53,6 +103,20 @@ function AdminPage() {
       }
     }
     fetchSituationData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchMotivationData() {
+      try {
+        axios.get("http://localhost:5000/motivations").then((res) => {
+          setMotivationData(res.data);
+          setQuestionList2(res.data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchMotivationData();
   }, []);
 
   useEffect(() => {
@@ -178,6 +242,52 @@ function AdminPage() {
         {/* test 1 */}
         <aside className="adminseaction2">
           <LabTabs testList={testList} />
+        </aside>
+        <aside className="adminseaction1">
+          <input
+            type="text"
+            className="textinput"
+            placeholder="Search"
+            name="serach"
+            onChange={(e) => setSearchUser(e.target.value)}
+          />
+          <ul className="list_of_user">
+            <table>
+              <tbody>
+                <tr>
+                  <th>Email</th>
+                  <th>Download Test</th>
+                </tr>
+                {searchUserFun(User).map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.email}</td>
+                    <td>
+                      {" "}
+                      <PDFDownloadLink
+                        document={
+                          <MyDocument
+                            firstname={item.first_name}
+                            lastname={item.last_name}
+                            email={item.email}
+                          />
+                        }
+                        fileName={item.first_name}
+                      >
+                        {({ loading }) =>
+                          loading ? (
+                            <button>Loading..</button>
+                          ) : (
+                            <button>Download</button>
+                          )
+                        }
+                      </PDFDownloadLink>
+                      {""}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </ul>
         </aside>
       </div>
     </>

@@ -8,6 +8,7 @@ const pdf = require("html-pdf");
 const QuestionsRoute = require("./Routes/QuestionsRoute.js");
 const MotivationsRoute = require("./Routes/MotivationsRoute.js");
 const UserDataRoute = require("./Routes/UserDataRoute");
+const ResultsRoute = require("./Routes/ResultsRoute");
 
 const pdfTemplate = require("./documents");
 
@@ -25,6 +26,7 @@ app.use(cors({ origin: "*" }));
 app.use("/questions", QuestionsRoute);
 app.use("/motivations", MotivationsRoute);
 app.use("/userdata", UserDataRoute);
+app.use("/answerByUniqueId", ResultsRoute);
 
 // PDF- generation
 app.post("/create-pdf", (req, res) => {
@@ -36,9 +38,9 @@ app.post("/create-pdf", (req, res) => {
   });
 });
 
-app.get("/fetch-pdf", (req, res) => {
-  res.sendFile(`${__dirname}/resultdemo.pdf`);
-});
+// app.get("/fetch-pdf", (req, res) => {
+//   res.sendFile(`${__dirname}/resultdemo.pdf`);
+// });
 
 mongoose
   .connect(process.env.MONGO_DB, {

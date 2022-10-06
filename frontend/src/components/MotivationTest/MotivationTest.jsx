@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { saveAs } from "file-saver";
+import { useNavigate } from "react-router-dom";
 
 let dataTest4 = [
   {
@@ -16,20 +17,25 @@ let dataTest4 = [
   },
 ];
 
-function MotivationTest() {
+function MotivationTest(props) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    props.setMotivations([]); //clears everytime we do a new test
+  }, []);
+
   const handleOnFieldChange = (e, index) => {
     dataTest4[index].answer = e.target.value;
-    console.log(dataTest4);
+    console.log(e.target.value);
+    props.setMotivations((prev) => [
+      ...prev,
+      { question: dataTest4[index].question, answer: e.target.value },
+    ]);
   };
 
   const handleSubmit = () => {
-    axios
-      .post("/create-pdf", dataTest4)
-      .then(() => axios.get("fetch-pdf", { responseType: "blob" }))
-      .then((res) => {
-        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-        saveAs(pdfBlob, "newDemoPdf.pdf");
-      });
+    props.setIsStart2(true);
+    navigate(`/${props.testLink}`);
   };
 
   return (

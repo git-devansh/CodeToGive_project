@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 
-function MotivationTestAdmin() {
-  const [questionList2, setQuestionList2] = useState([
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-    // { question: "sxsx", imageData: "" },
-  ]);
+function MotivationTestAdmin(props) {
+  const handleAddNew = (e) => {
+    //devansh you aren't adding any new question in this funciton
 
-  const handleAddNew = () => {
-    setQuestionList2([...questionList2, { question: "", queNum: "" }]);
-    console.log(questionList2);
+    props.setQuestionList2([
+      ...props.questionList2,
+      { question: "", queNum: "" },
+    ]);
+    console.log(props.questionList2);
   };
 
   const handleQuestionChange = (event, index) => {
-    const inputData = [...questionList2];
+    const inputData = [...props.questionList2];
     inputData[index].question = event.target.value;
-    setQuestionList2(inputData);
+    props.setQuestionList2(inputData);
     // console.log(questionList);
   };
 
   const handleDelete = (index) => {
-    const deleteValue = [...questionList2];
+    const deleteValue = [...props.questionList2];
     deleteValue.splice(index, 1);
-    setQuestionList2(deleteValue);
+    props.setQuestionList2(deleteValue);
   };
 
   const validationOnSubmit = (questionList) => {
@@ -36,19 +33,36 @@ function MotivationTestAdmin() {
     return true;
   };
 
+  console.log(props.questionList2);
+
   const handleSubmit = (e) => {
-    Array.from(questionList2).forEach(function (ele, i) {
+    Array.from(props.questionList2).forEach(function (ele, i) {
       ele.queNum = i + 1;
     });
-    if (validationOnSubmit(questionList2) && questionList2.length !== 0) {
-      console.log(questionList2);
+
+    if (
+      validationOnSubmit(props.questionList2) &&
+      props.questionList2.length !== 0
+    ) {
+      for (let i = 0; i < props.questionList2.length; i++) {
+        fetch("http://localhost:5000/motivations/add", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            question: props.questionList2[i].question,
+          }),
+        });
+      }
     }
   };
-
+  //fuck we should do it as props
   return (
     <>
-      {questionList2.length ? (
-        questionList2.map((questionItem, index) => (
+      {props.questionList2.length ? (
+        props.questionList2.map((questionItem, index) => (
           <div className="socialsituationbox" key={index}>
             <h4 className="question-h3-text">Question {index + 1}</h4>
             <p>Add the question</p>

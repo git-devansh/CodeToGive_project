@@ -392,6 +392,20 @@ code {
   text-align: center;
 }
 
+/* admin search user */
+.list_of_user {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.list_of_item {
+  margin-bottom: 20px;
+  font-size: 21px;
+  color: #444;
+  font-weight: 300;
+}
+
 /* homep page */
 .test_main_section {
   width: 100%;
@@ -606,4 +620,23 @@ input[type="text"] {
 .button_style_SocialTest:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+table {
+  width: 100%;
+  margin: 20px 0px;
+  border-spacing: 15px;
+  color: #444;
+}
+
+tr {
+  margin-bottom: 20px;
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  text-align: left;
 }
